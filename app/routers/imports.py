@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 from app import crud, schemas
 from app.database import get_db
 from app.services.job_analyzer import analyze_job_description
+from app.services.duplicate_detector import check_duplicate_application
 from app.services.greenhouse_importer import import_greenhouse_jobs_preview
 
 router = APIRouter(
@@ -55,6 +56,24 @@ def import_application_from_description(
         resume_version=payload.resume_version,
         notes=combined_notes,
     )
+
+    duplicate_check = check_duplicate_application(
+        db=db,
+        company=application_data.company,
+        role=application_data.role,
+        link=application_data.link,
+    )
+
+    if duplicate_check["duplicate_found"]:
+        existing_application = crud.get_application(
+            db=db,
+            application_id=duplicate_check["existing_application_id"],
+        )
+
+        return {
+            "application": existing_application,
+            "analysis": analysis,
+        }
 
     application = crud.create_application(
         db=db,

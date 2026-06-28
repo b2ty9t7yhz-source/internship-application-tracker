@@ -4,6 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 
 from app import crud, schemas
+from app.services.duplicate_detector import check_duplicate_application
 from app.database import get_db
 
 router = APIRouter(
@@ -74,3 +75,20 @@ def delete_application(
         raise HTTPException(status_code=404, detail="Application not found")
 
     return crud.delete_application(db=db, db_application=db_application)
+
+
+@router.post(
+    "/check-duplicate",
+    response_model=schemas.DuplicateCheckResponse,
+)
+def check_duplicate(
+    payload: schemas.DuplicateCheckRequest,
+    db: Session = Depends(get_db),
+):
+    return check_duplicate_application(
+        db=db,
+        company=payload.company,
+        role=payload.role,
+        link=payload.link,
+    )
+

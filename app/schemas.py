@@ -151,3 +151,19 @@ class GreenhouseImportResponse(BaseModel):
     matched_jobs: int
     saved_jobs: int
     results: list[GreenhouseImportItem]
+
+
+class DuplicateCheckRequest(BaseModel):
+    company: str
+    role: str
+    link: Optional[str] = None
+
+
+class DuplicateCheckResponse(BaseModel):
+    duplicate_found: bool
+    score: int
+    reason: str
+    existing_application_id: Optional[int] = None
+    existing_company: Optional[str] = None
+    existing_role: Optional[str] = None
+    existing_link: Optional[str] = None
