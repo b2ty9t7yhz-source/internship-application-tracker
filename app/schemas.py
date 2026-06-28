@@ -209,3 +209,31 @@ class ResumeRecommendationResponse(BaseModel):
     recommended_resume: Optional[ResumeScore] = None
     all_resume_scores: list[ResumeScore]
     job_analysis: JobDescriptionAnalysisResponse
+
+
+class ApplicationIntelligenceReportRequest(BaseModel):
+    company: Optional[str] = None
+    role: Optional[str] = None
+    description: str
+    user_skills: list[str] = []
+    deadline: Optional[date] = None
+    preferred_locations: list[str] = []
+    resume_versions: list[ResumeVersionInput] = []
+
+
+class PrioritySummary(BaseModel):
+    priority_score: int
+    priority_level: str
+    recommendation: str
+    reasons: list[str]
+
+
+class ApplicationIntelligenceReportResponse(BaseModel):
+    company: Optional[str] = None
+    role: Optional[str] = None
+    analysis: JobDescriptionAnalysisResponse
+    priority: PrioritySummary
+    recommended_resume: Optional[ResumeScore] = None
+    all_resume_scores: list[ResumeScore]
+    action_items: list[str]
+    suggested_notes: str
