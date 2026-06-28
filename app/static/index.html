@@ -10,12 +10,45 @@
   <header class="topbar">
     <div>
       <h1>Internship Application Intelligence Tracker</h1>
-      <p>Track applications, analyze job descriptions, and prioritize roles.</p>
+      <p>Track applications, analyze job descriptions, recommend resumes, and prioritize roles.</p>
     </div>
-    <button id="refreshBtn">Refresh Applications</button>
+    <div class="topbar-actions">
+      <a href="/docs" target="_blank">API Docs</a>
+      <button id="refreshBtn">Refresh</button>
+    </div>
   </header>
 
   <main class="layout">
+    <section class="card full">
+      <div class="section-header">
+        <h2>Dashboard</h2>
+        <span id="lastUpdated">Not loaded yet</span>
+      </div>
+
+      <div class="metrics-grid">
+        <div class="metric">
+          <strong id="totalApplications">0</strong>
+          <span>Total Applications</span>
+        </div>
+        <div class="metric">
+          <strong id="savedApplications">0</strong>
+          <span>Saved</span>
+        </div>
+        <div class="metric">
+          <strong id="appliedApplications">0</strong>
+          <span>Applied</span>
+        </div>
+        <div class="metric">
+          <strong id="interviewApplications">0</strong>
+          <span>Interview</span>
+        </div>
+        <div class="metric">
+          <strong id="upcomingDeadlines">0</strong>
+          <span>Deadlines Next 14 Days</span>
+        </div>
+      </div>
+    </section>
+
     <section class="card wide">
       <div class="section-header">
         <h2>Applications</h2>
@@ -90,6 +123,52 @@
       </form>
     </section>
 
+    <section class="card full">
+      <h2>Import From Job Description</h2>
+      <p class="helper">Paste a job description. The app will analyze it, generate notes, and save it as an application.</p>
+
+      <form id="importForm" class="form report-grid">
+        <label>
+          Company
+          <input name="company" required placeholder="Demo Company" />
+        </label>
+
+        <label>
+          Role
+          <input name="role" required placeholder="Backend Engineer Intern" />
+        </label>
+
+        <label>
+          Link
+          <input name="link" placeholder="https://example.com/job" />
+        </label>
+
+        <label>
+          Source
+          <input name="source" placeholder="Manual Import" />
+        </label>
+
+        <label>
+          Resume Version
+          <input name="resume_version" placeholder="resume_backend_v1" />
+        </label>
+
+        <label>
+          Your Skills
+          <input name="user_skills" placeholder="Python, SQL, REST API, FastAPI, Git" />
+        </label>
+
+        <label class="full">
+          Job Description
+          <textarea name="description" required rows="7" placeholder="Paste job description here..."></textarea>
+        </label>
+
+        <button type="submit">Analyze and Save</button>
+      </form>
+
+      <pre id="importResult" class="result-box"></pre>
+    </section>
+
     <section class="card">
       <h2>Job Description Analyzer</h2>
 
@@ -110,10 +189,10 @@
       <pre id="analysisResult" class="result-box"></pre>
     </section>
 
-    <section class="card wide">
+    <section class="card">
       <h2>Application Intelligence Report</h2>
 
-      <form id="reportForm" class="form report-grid">
+      <form id="reportForm" class="form">
         <label>
           Company
           <input name="company" placeholder="Demo Company" />
@@ -134,12 +213,12 @@
           <input name="preferred_locations" placeholder="Remote, Hybrid" />
         </label>
 
-        <label class="full">
+        <label>
           Job Description
           <textarea name="description" required rows="8" placeholder="Paste job description here..."></textarea>
         </label>
 
-        <label class="full">
+        <label>
           Your Skills
           <input name="user_skills" placeholder="Python, SQL, REST API, FastAPI, Git" />
         </label>
