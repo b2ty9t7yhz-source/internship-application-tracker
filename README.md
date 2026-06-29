@@ -266,3 +266,12 @@ Health Check:
     https://internship-application-tracker-l6ha.onrender.com/health
 
 Note: The app is hosted on a free Render instance, so the first request may take extra time if the service has been inactive.
+
+## Project Showcase
+
+Additional project materials:
+
+    docs/project_showcase.md
+    docs/resume_bullets.md
+    docs/linkedin_project_description.md
+    docs/interview_explanation.md
