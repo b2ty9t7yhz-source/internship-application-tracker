@@ -248,3 +248,21 @@ After deployment:
 See:
 
     docs/deployment.md
+
+## Live Demo
+
+The project is deployed on Render.
+
+Web UI:
+
+    https://internship-application-tracker-l6ha.onrender.com/ui
+
+API Docs:
+
+    https://internship-application-tracker-l6ha.onrender.com/docs
+
+Health Check:
+
+    https://internship-application-tracker-l6ha.onrender.com/health
+
+Note: The app is hosted on a free Render instance, so the first request may take extra time if the service has been inactive.
